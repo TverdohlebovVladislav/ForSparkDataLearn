@@ -33,10 +33,10 @@ emp_df.show(2, False)
 # Решение задачи 
 query = emp_df.join(managers_df, managers_df.EMPLOYEE_ID == emp_df.MANAGER_ID) \
               .select(
-                    emp_df.EMPLOYEE_ID, 
-                    emp_df.LAST_NAME.alias('emp_last_name'), 
-                    emp_df.MANAGER_ID, 
-                    managers_df.LAST_NAME.alias('mgr_last_name')
+                  emp_df.LAST_NAME.alias('Employee'), 
+                  emp_df.EMPLOYEE_ID.alias('EmpID'), 
+                  managers_df.LAST_NAME.alias('Manager'),
+                  emp_df.MANAGER_ID.alias('MgrID')      
                 )
 query.write.format("avro").option("compression", "snappy").mode("overwrite").save("/content/data_out/task_4")
 
